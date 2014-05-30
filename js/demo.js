@@ -120,7 +120,7 @@
         var LINE_PAVEMENT_LOWER = 360;
         
         
-        var PARKING_SPACES = 8;
+        var PARKING_SPACES = 7;
         var PARKING_WIDTH = Math.floor( WIDTH/ PARKING_SPACES );
         
         var PARKING_CENTERS = new Array( PARKING_SPACES );
@@ -308,8 +308,6 @@
         
         function traffic_function() {
             if( traffic_car.getX() > WIDTH + 200 ){
-                
-                console.log( traffic_car );
                 traffic_car.setX( -100 );
                 traffic_car.attrs.count += 1;
                 if( traffic_car.attrs.count % 2 ){
@@ -342,7 +340,7 @@
         add_parked_car(3);
         add_parked_car(4);
         add_parked_car(5);
-        add_parked_car(7);
+        /*add_parked_car(7);*/
         antonakis_car = add_parked_car( 6, img.antonis_car );
         var antonakis_car_label =  new Kinetic.Text({
             x: antonakis_car.getX(),

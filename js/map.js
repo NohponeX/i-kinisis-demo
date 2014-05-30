@@ -175,8 +175,9 @@ function map_start_ready(){
         $( "#instructions" ).show();
         draw_instructions_arrow();
     });
+    var mark_parking;
     $( "#parking_yes" ).on('click touch', function(){
-        var mark_parking = new Kinetic.Image({
+        mark_parking = new Kinetic.Image({
             x : destination_position.x,
             y : destination_position.y + 10 + imgs[img.parking].height,
             image : imgs[img.parking],
@@ -201,6 +202,12 @@ function map_start_ready(){
     instructions_layer.add( instructions_arrow );
     map.add( instructions_layer );
 
+
+    $( "#do_parking_yes" ).on('click touch', function(){
+        marker_destination.hide();
+        mark_parking.hide();
+        markers.draw();    
+    });
     function draw_instructions_arrow(){
         if( arrived ){
             instructions_layer.hide();
@@ -215,6 +222,7 @@ function map_start_ready(){
             $( "#do_parking" ).show();
             $( "#ask_parking" ).hide();
             $( "#instructions" ).hide();
+            
         }else{
             instructions_layer.show();
             instructions_arrow.setX( x + 25 );
