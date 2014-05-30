@@ -176,7 +176,6 @@ function map_start_ready(){
         draw_instructions_arrow();
     });
     $( "#parking_yes" ).on('click touch', function(){
-        alert( 'yes');
         var mark_parking = new Kinetic.Image({
             x : destination_position.x,
             y : destination_position.y + 10 + imgs[img.parking].height,
@@ -192,7 +191,7 @@ function map_start_ready(){
     var instructions_layer = new Kinetic.Layer(); 
 
     var instructions_arrow = new Kinetic.Image({
-        x : CONTROL_TARGET.getX() + 20,
+        x : CONTROL_TARGET.getX() + 25,
         y : road_center_height + 15 - imgs[img.arrow].height/2,
         image : imgs[img.arrow],
         width : imgs[img.arrow].width,
@@ -218,7 +217,7 @@ function map_start_ready(){
             $( "#instructions" ).hide();
         }else{
             instructions_layer.show();
-            instructions_arrow.setX( x + 20 );
+            instructions_arrow.setX( x + 25 );
         }
 
         instructions_layer.draw();

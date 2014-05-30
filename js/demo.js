@@ -22,7 +22,7 @@
     imageURLs[img.marker] = 'images/marker-sm.png';
     imageURLs[img.arrow] = 'images/arrow-xs.png';
     imageURLs[img.parking] = 'images/parking.png';
-    
+
     var imagesOK = 0;
     var images = 0;
     var imgs = [];
@@ -64,7 +64,7 @@
         });
     }
 
-    function replaceColor(image, ra, ga, ba, r, g, b) {
+    function replaceColor(image, r, g, b) {
         var canvas = document.createElement('canvas');
         canvas.height = image.height;
         canvas.width = image.width;
@@ -101,14 +101,15 @@
 
     function start() {
         console.log( "START" ); 
-        //imgs[img.ouzounis] = replaceColor(imgs[img.ouzounis], 255 * 0.2126, 255 * 0.7152, 255 * 0.722, 105, 50, 170);
-        imgs[img.traffic_car] = replaceColor(imgs[img.car], 255 * 0.2126, 255 * 0.7152, 255 * 0.722, 30, 70, 20);
-        imgs[img.antonis_car] = replaceColor(imgs[img.car], 255 * 0.2126, 255 * 0.7152, 255 * 0.722, 130, 50, 120);
+        //imgs[img.ouzounis] = replaceColor(imgs[img.ouzounis], 105, 50, 170);
+        imgs[img.traffic_car] = replaceColor(imgs[img.car], 127,175,27);
+        imgs[img.traffic_car_2] = replaceColor(imgs[img.car], 246,68,78);
+        imgs[img.antonis_car] = replaceColor(imgs[img.car], 130, 50, 120);
 
-        imgs[img.marker_me] = replaceColor(imgs[img.marker], 255 * 0.2126, 255 * 0.7152, 255 * 0.722, 246,68,78);
+        imgs[img.marker_me] = replaceColor(imgs[img.marker], 246,68,78);
 
-        imgs[img.marker_destination] = replaceColor(imgs[img.marker], 255 * 0.2126, 255 * 0.7152, 255 * 0.722, 80,186,78);
-        imgs[img.arrow] = replaceColor(imgs[img.arrow], 255 * 0.2126, 255 * 0.7152, 255 * 0.722, 167,204,149);
+        imgs[img.marker_destination] = replaceColor(imgs[img.marker], 80,186,78);
+        imgs[img.arrow] = replaceColor(imgs[img.arrow], 167,204,149);
 
         //var HEIGHT = 600;
         //var WIDTH = $( '#container' ).width(); // 600;
@@ -242,9 +243,9 @@
                 fontFamily: 'Arial',
                 fill: '#FFFFFF',
                 align: 'center'
-              });
-              parking_sign_layer.add( parking_sign_line );
-              parking_sign_layer.add( parking_sign_text );
+            });
+            parking_sign_layer.add( parking_sign_line );
+            parking_sign_layer.add( parking_sign_text );
         }
          
         road_layer.add( parking_sign_layer );
@@ -297,7 +298,8 @@
             y : Math.floor( levels.ROAD_LINE_2 - imgs[img.traffic_car].height/2 ),
             image : imgs[img.traffic_car],
             width : imgs[img.traffic_car].width,
-            height : imgs[img.traffic_car].height
+            height : imgs[img.traffic_car].height,
+            count:0
         });
         traffic_layer.add( traffic_car );
         stage.add( traffic_layer );
@@ -306,14 +308,22 @@
         
         function traffic_function() {
             if( traffic_car.getX() > WIDTH + 200 ){
-                traffic_car.setX( - 100 );
+                
+                console.log( traffic_car );
+                traffic_car.setX( -100 );
+                traffic_car.attrs.count += 1;
+                if( traffic_car.attrs.count % 2 ){
+                    traffic_car.attrs.image = imgs[img.traffic_car_2];
+                }else{
+                    traffic_car.attrs.image = imgs[img.traffic_car];
+                }
             }
             traffic_car.setX(traffic_car.getX() + 5); 
             traffic_layer.draw();
         }
 /*parked_cars*/
         function add_parked_car( position, image ){
-            image = typeof image !== 'undefined' ? image : img.traffic_car;
+            image = typeof image !== 'undefined' ? image : ( position%2 ? img.traffic_car : img.traffic_car_2 );
             
             PARKING_AVAILABLE[ position ] = false;
             var parked_car = new Kinetic.Image({
@@ -334,6 +344,16 @@
         add_parked_car(5);
         add_parked_car(7);
         antonakis_car = add_parked_car( 6, img.antonis_car );
+        var antonakis_car_label =  new Kinetic.Text({
+            x: antonakis_car.getX(),
+            y: antonakis_car.getY()-40,
+            text: 'Antonakis',
+            fontSize: 14,
+            fontFamily: 'Arial',
+            fill: '#823278',
+            align: 'center'
+        });
+        traffic_layer.add( antonakis_car_label );
         function getPosition( ){
             var x = CONTROL_TARGET.getX();
             
@@ -348,10 +368,13 @@
             if( antonakis_car != null && antonakis_car.getX() < WIDTH + 50 ){
                 antonakis_car.setY( levels.ROAD - Math.floor( antonakis_car.attrs.height/2 ) );
                 antonakis_car.setX( antonakis_car.getX() + 0.5 );
+                antonakis_car_label.setX( antonakis_car.getX() );
+                antonakis_car_label.setY( antonakis_car.getY() -40 );
                 setInterval( runAntonakis, 200 );
                 PARKING_AVAILABLE[ antonakis_car.attrs.parking_space ] = true; 
             }else{
                 antonakis_car = null;
+                antonakis_car_label = null;
                 clearInterval( runAntonakis );
             }
             traffic_layer.draw();
