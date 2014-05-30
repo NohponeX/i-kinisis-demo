@@ -1,0 +1,53 @@
+<div class="row">
+	<div class="btn-group btn-group-xs btn-group-justified">
+	  
+      
+      <div class="btn-group btn-group-xs ">
+        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          Διαδρομές <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">Αγαπημένες διαδρομές</a></li>
+      </ul>
+      </div>
+      <a class="btn btn-warning" role="button">Επιλογές</a>
+      <a class="btn btn-primary" role="button">Χάρτης</a>
+	</div>
+</div>
+<div id="pop_up" class="row">
+	<div id="ask_parking" class="alert alert-info">
+		<b>Θέλετε να παρκάρετε στον προορισμό που δηλώσατε ?</b>
+		<a href="#" class="btn btn-success">Ναι</a>
+		<a href="#" class="btn btn-primary">Όχι</a>
+	</div>
+	<div id="instructions" class="alert alert-info">
+		<b><i class="fa fa-map-marker fa-green fa-2x"></i> Προορισμός Σημειο Β - MainStreet</b>
+		Οδηγίες:
+		<ul class="list-unstyled">
+			<li> <i class="fa fa-arrow-circle-o-up fa-lg"></i> Συνεχίστε ευθεία για 100 μέτρα</li>
+		</ul>
+	</div>
+	<div id="do_parking" class="alert alert-warning">
+		<b>Θέλετε να παρκάρετε στη θέση αυτή ?</b>
+		<a href="#" class="btn btn-success">Ναι</a>
+		<a href="#" class="btn btn-primary">Όχι</a>
+	</div>
+</div>
+
+</div class="row">
+  <div id="map"></div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content panel-success">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Welcome {{email}}</h4>
+      </div>
+      <div class="modal-body">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
