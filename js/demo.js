@@ -11,7 +11,8 @@
         marker_me:7,
         marker_destination:8,
         traffic_car:4,
-        antonis_car:5
+        antonis_car:5,
+        parking:6
     };
 
     var imageURLs = [];
@@ -20,6 +21,8 @@
     imageURLs[img.car] = 'images/car-xss.png';
     imageURLs[img.marker] = 'images/marker-sm.png';
     imageURLs[img.arrow] = 'images/arrow-xs.png';
+    imageURLs[img.parking] = 'images/parking.png';
+    
     var imagesOK = 0;
     var images = 0;
     var imgs = [];
@@ -105,6 +108,7 @@
         imgs[img.marker_me] = replaceColor(imgs[img.marker], 255 * 0.2126, 255 * 0.7152, 255 * 0.722, 246,68,78);
 
         imgs[img.marker_destination] = replaceColor(imgs[img.marker], 255 * 0.2126, 255 * 0.7152, 255 * 0.722, 80,186,78);
+        imgs[img.arrow] = replaceColor(imgs[img.arrow], 255 * 0.2126, 255 * 0.7152, 255 * 0.722, 167,204,149);
 
         //var HEIGHT = 600;
         //var WIDTH = $( '#container' ).width(); // 600;

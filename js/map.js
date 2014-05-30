@@ -164,7 +164,7 @@ function map_start_ready(){
     CONTROL_TARGET_ON_MOVE();
 
     var destination_set = false;
-    $(map.getContent()).on('click', function(){
+    $(map.getContent()).on('click touch', function(){
         if( destination_set ){
             return;
         }
@@ -173,6 +173,20 @@ function map_start_ready(){
         markers.draw();
         $( "#ask_parking" ).show();
         $( "#instructions" ).show();
+        draw_instructions_arrow();
+    });
+    $( "#parking_yes" ).on('click touch', function(){
+        alert( 'yes');
+        var mark_parking = new Kinetic.Image({
+            x : destination_position.x,
+            y : destination_position.y + 10 + imgs[img.parking].height,
+            image : imgs[img.parking],
+            width : imgs[img.parking].width,
+            height : imgs[img.parking].height
+        }); 
+        markers.add( mark_parking );
+        markers.draw();
+
     });
     var arrived = false;
     var instructions_layer = new Kinetic.Layer(); 

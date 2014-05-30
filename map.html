@@ -7,7 +7,7 @@
           Διαδρομές <span class="caret"></span>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <li><a href="#">Αγαπημένες διαδρομές</a></li>
+          <li><a role="button">Αγαπημένες διαδρομές</a></li>
       </ul>
       </div>
       <a class="btn btn-danger" role="button">Επιλογές</a>
@@ -17,12 +17,12 @@
 <div id="pop_up" class="row">
 	<div id="ask_parking" class="alert alert-info">
 		<b>Θέλετε να παρκάρετε στον προορισμό που δηλώσατε ?</b>
-		<button data-dismiss="alert" class="btn btn-xs btn-success">Ναι</button>
+		<button data-dismiss="alert" class="btn btn-xs btn-success" id="parking_yes">Ναι</button>
     <button data-dismiss="alert" class="btn btn-xs btn-danger">Όχι</button>
 	</div>
 	<div id="instructions" class="alert alert-info">
 		<b><i class="fa fa-map-marker fa-green fa-2x"></i> Προορισμός Σημειο Β - MainStreet</b>
-		Οδηγίες:
+		<p>Οδηγίες:</p>
 		<ul class="list-unstyled">
 			<li> <i class="fa fa-arrow-circle-o-up fa-lg"></i> Συνεχίστε ευθεία για 100 μέτρα</li>
 		</ul>
