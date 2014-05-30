@@ -1,4 +1,7 @@
 function map_start(){
+    $( "#ask_parking" ).hide();
+    $( "#instructions" ).hide();
+    $( "#do_parking" ).hide();
     loadAllImages( map_start_ready );
 }
 function map_start_ready(){
@@ -141,6 +144,7 @@ function map_start_ready(){
         width : imgs[img.marker_destination].width,
         height : imgs[img.marker_destination].height
     }); 
+    marker_destination.hide();
     markers.add( marker_destination );
 
     map.add( markers );
@@ -153,6 +157,56 @@ function map_start_ready(){
 
         marker_me.setX( translate_x( CONTROL_TARGET.getX() ) );  
         markers.draw();
+        if( destination_set && !arrived ){
+            draw_instructions_arrow();
+        }
     } 
     CONTROL_TARGET_ON_MOVE();
+
+    var destination_set = false;
+    $(map.getContent()).on('click', function(){
+        if( destination_set ){
+            return;
+        }
+        destination_set = true;
+        marker_destination.show();
+        markers.draw();
+        $( "#ask_parking" ).show();
+        $( "#instructions" ).show();
+    });
+    var arrived = false;
+    var instructions_layer = new Kinetic.Layer(); 
+
+    var instructions_arrow = new Kinetic.Image({
+        x : CONTROL_TARGET.getX() + 20,
+        y : road_center_height + 15 - imgs[img.arrow].height/2,
+        image : imgs[img.arrow],
+        width : imgs[img.arrow].width,
+        height : imgs[img.arrow].height
+    }); 
+    instructions_layer.hide();
+    instructions_layer.add( instructions_arrow );
+    map.add( instructions_layer );
+
+    function draw_instructions_arrow(){
+        if( arrived ){
+            instructions_layer.hide();
+            return;
+        }
+        var x  =translate_x(CONTROL_TARGET.getX()) ;
+        var distance = Math.abs( x - destination_position.x );
+        if( distance <= 10 ){
+            arrived = true;
+            //call parking
+            instructions_layer.hide();
+            $( "#do_parking" ).show();
+            $( "#ask_parking" ).hide();
+            $( "#instructions" ).hide();
+        }else{
+            instructions_layer.show();
+            instructions_arrow.setX( x + 20 );
+        }
+
+        instructions_layer.draw();
+    }
 }

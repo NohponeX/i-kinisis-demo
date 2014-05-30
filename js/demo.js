@@ -5,6 +5,7 @@
              road : 2};
     var img = {
         ouzounis : 0,
+        arrow:1,
         car : 2,
         marker: 3,
         marker_me:7,
@@ -18,6 +19,7 @@
     imageURLs[img.ouzounis] = 'images/zounis-label-sm.png';
     imageURLs[img.car] = 'images/car-xss.png';
     imageURLs[img.marker] = 'images/marker-sm.png';
+    imageURLs[img.arrow] = 'images/arrow-xs.png';
     var imagesOK = 0;
     var images = 0;
     var imgs = [];
